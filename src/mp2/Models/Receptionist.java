@@ -3,6 +3,8 @@ package mp2.Models;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  *
@@ -25,14 +27,14 @@ public class Receptionist {
     }
     private String workShift;
     private List<CustomerConversation> customerConversations = new ArrayList<>();
-
+    private Map<Integer, Order> ordersQualificator = new TreeMap<>();
+    
     public Receptionist(String firstName, String secondName, WorkShift workShift, String[] knowledgeableLanguages) {
         setFirstName(firstName);
         setSecondName(secondName);
         setWorkShift(workShift);
         this.knowledgeableLanguages = Arrays.asList(knowledgeableLanguages);
     }
-    
     
     public String[] getKnowledgeableLanguages() {
         return this.knowledgeableLanguages.toArray(new String[0]);
@@ -116,4 +118,39 @@ public class Receptionist {
             newConversation.setReceptionist(this);
         }
     }
+    
+    public void removeCustomerConversation(CustomerConversation conversationToRemove){
+        if(customerConversations.contains(conversationToRemove)) {
+            customerConversations.remove(conversationToRemove);
+            
+            conversationToRemove.removeReception(this);
+        }
+    }
+    
+    public void addOrderQualif(Order newOrder) {
+        if(!ordersQualificator.containsKey(newOrder.getId())) { 
+            ordersQualificator.put(newOrder.getId(), newOrder);
+            
+            newOrder.setReceptionistQualif(this);
+        }
+    }
+    /*
+    public void addOrderQualif(Order newOrder) {
+        if(!ordersQualificator.containsKey(newOrder.getId())) { 
+            ordersQualificator.put(newOrder.getId(), newOrder);
+            
+            newOrder.setReceptionistQualif(this);
+        }
+    }
+    */
+    
+    public void removeOrderQualif(Order order){
+        if(ordersQualificator.containsKey(order.getId())) {
+            ordersQualificator.remove(order.getId());
+            order.removeReceptionistQualif(this);
+        }
+    }
+    
+    
+    
 }

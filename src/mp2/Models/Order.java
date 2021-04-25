@@ -8,6 +8,7 @@ package mp2.Models;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -21,7 +22,8 @@ public class Order {
     private String comment; 
    
     private Client client;
-
+    private Receptionist receptionist;
+    
     public Order(int quantityPersonsForLiving, String comment) {
         setQuantityPersonsForLiving(quantityPersonsForLiving);
         setComment(comment);
@@ -60,8 +62,6 @@ public class Order {
     private Client getClient() {
         return client;
     }
-
-    
     
     @Override
     public String toString() {
@@ -75,14 +75,40 @@ public class Order {
     }
 
     public void setClient(Client newClient) {
-        // Будет ли StackOwerflow, если добавить null, как клиента?
-        // Мб, сразу уьрать возможность добавления nnull
-//         Ти:if(client.equals(null) || !newClient.equals(null)
-//         if(client.equals(null)) { 
-        if((getClient() == null) && !(newClient == null)){
+        if((getClient() == null) && newClient != null){
             this.client = newClient;
             
             newClient.addOrder(this);
         }
+    }
+    
+    public void removeClient(Client clientToRemove) {
+        if( this.getClient() != null && this.getClient() == clientToRemove) {
+            client = null;
+            
+            clientToRemove.removeOrder(this);
+        }
+    }
+    
+    public void setReceptionistQualif(Receptionist newReceptionist) {
+        if((getReceptionistQualif()== null) && newReceptionist != null){
+            this.receptionist = newReceptionist;
+            
+            newReceptionist.addOrderQualif(this);
+        }
+    }
+    
+    public void removeReceptionistQualif(Receptionist receptionistToRemove) {
+        if( this.getReceptionistQualif() != null
+            &&
+            this.getReceptionistQualif() == receptionistToRemove
+        ) {
+            this.receptionist = null;
+     
+            receptionistToRemove.removeOrderQualif(this);
+        }
+    }
+    public Receptionist getReceptionistQualif() {
+        return this.receptionist;
     }
 }

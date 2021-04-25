@@ -119,6 +119,14 @@ public class CustomerConversation {
             newReceptionist.addCustomerConversation(this);
         }
     }
+    public void removeReception(Receptionist receptionistToRemove){
+        if( getReceptionist() != null && getReceptionist() == receptionistToRemove) {
+            receptionist = null;
+            
+            receptionistToRemove.removeCustomerConversation(this);
+        }
+    }
+    
     
     private Client getClient()
     {
@@ -131,7 +139,16 @@ public class CustomerConversation {
             newClient.addCustomerConversation(this);
         }
     }
-
+    
+    public void removeClient(Client clientToRemove){
+        if( getClient() != null && getClient() == clientToRemove) {
+            client = null;
+            
+            clientToRemove.removeCustomerConversation(this);
+        }
+    }
+    
+    
     
     public String getShortInfo(){
         return "CustomerConversation{" 

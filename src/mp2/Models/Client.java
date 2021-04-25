@@ -105,6 +105,14 @@ public class Client {
         }
     }
     
+    public void removeOrder(Order orderToRemove) {
+        if(orders.contains(orderToRemove)) {
+            orders.remove(orderToRemove);
+
+            orderToRemove.removeClient(this);
+        }
+    }
+    
     public void addCustomerConversation(CustomerConversation newConversation) {
         if( !(newConversation == null) && !customerConversations.contains(newConversation)) { 
             customerConversations.add(newConversation);
@@ -112,4 +120,14 @@ public class Client {
             newConversation.setClient(this);
         }
     }
+    
+    
+    public void removeCustomerConversation(CustomerConversation conversationToRemove){
+        if(customerConversations.contains(conversationToRemove)) {
+            customerConversations.remove(conversationToRemove);
+            
+            conversationToRemove.removeClient(this);
+        }
+    }
+    
 }
