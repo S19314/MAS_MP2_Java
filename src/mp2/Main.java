@@ -5,8 +5,8 @@
  */
 package mp2;
 
-import mp2.Models.Office;
-import mp2.Models.Person;
+import mp2.Models.Order;
+import mp2.Models.Client;
 
 /**
  *
@@ -15,10 +15,9 @@ import mp2.Models.Person;
 public class Main {
 
     public static void main(String[] args) {
-        Person person1 = new Person("Nodzu", "Mitycura"),
-               person2 = new Person("Nikolaj", "Lisicyn");
-        Office office1 = new Office(12, "4551 Airport Rd, Riverton, WY 82501, USA"),
-               office2 = new Office(35, "1501 N Poplar St, Casper, WY 82601, USA");;
+        Client person1 = new Client("Nodzu", "Mitycura");
+        Person person2 = new Client("Nikolaj", "Lisicyn");
+        Order office1 = new Order(12, "4551 Airport Rd, Riverton, WY 82501, USA");        Office office2 = new Order(35, "1501 N Poplar St, Casper, WY 82601, USA");;
                
         person1.addOffice(office2);
         office1.addPerson(person2);
