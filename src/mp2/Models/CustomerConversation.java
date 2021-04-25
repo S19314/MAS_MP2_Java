@@ -20,11 +20,17 @@ public class CustomerConversation {
     private int conversationLengthInSeconds; // długość rozmowy
     private LocalDateTime startDateTime = LocalDateTime.now();
     private Receptionist receptionist;
-
-    public CustomerConversation(int markServiceQuality, int conversationLengthInSeconds, Receptionist receptionist) {
+    private Client client;
+            
+    public CustomerConversation(
+            int markServiceQuality, 
+            int conversationLengthInSeconds,
+            Receptionist receptionist, 
+            Client client) {
         this.setMarkServiceQuality(markServiceQuality);
         this.setConversationLengthInSeconds(conversationLengthInSeconds);
         this.setReceptionist(receptionist);
+        this.setClient(client);
     }
     
     private int createId()
@@ -84,21 +90,42 @@ public class CustomerConversation {
         return receptionist;
     }
     public void setReceptionist(Receptionist newReceptionist) {
-        // Будет ли StackOwerflow, если добавить null, как клиента?
-        // Мб, сразу уьрать возможность добавления nnull
-//         Ти:if(client.equals(null) || !newClient.equals(null)
-//         if(client.equals(null)) { 
         if((getReceptionist() == null) && !(newReceptionist == null)){
             this.receptionist = newReceptionist;
             
             newReceptionist.addCustomerConversation(this);
         }
     }
+    
+    private Client getClient()
+    {
+        return client;
+    }
+    public void setClient(Client newClient) {
+        if((getClient() == null) && !(newClient == null)){
+            this.client = newClient;
+            
+            newClient.addCustomerConversation(this);
+        }
+    }
+
+    
+    public String getShortInfo(){
+        return "CustomerConversation{" 
+                + "id=" + getId() 
+                + ", markServiceQuality=" + getMarkServiceQuality() 
+                + ", conversationLengthInSeconds=" + getConversationLengthInSeconds()
+                + ", startDateTime=" + getStartDateTime()
+                + ", endDateTime=" + getEndDateTime()
+                + '}';
+    }
 
     @Override
     public String toString() {
-        return "Eeee, брат, сделай ToString*( в CustomerConversation";
-//        return "CustomerConversation{" + "id=" + id + ", markUpperBound=" + markUpperBound + ", markBottomBound=" + markBottomBound + ", markServiceQuality=" + markServiceQuality + ", conversationLengthInSeconds=" + conversationLengthInSeconds + ", startDateTime=" + startDateTime + ", receptionist=" + receptionist + '}';
+        String baseMessage = getShortInfo() + ", " 
+                + client.getShortInfo() + ", " 
+                + receptionist.getShortInfo() + ".";
+        return baseMessage;
     }
     
     

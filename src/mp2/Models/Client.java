@@ -19,7 +19,8 @@ public class Client {
     private String numberPhone;
     
     private List<Order> orders = new ArrayList<Order>();
-
+    private List<CustomerConversation> customerConversations = new ArrayList<CustomerConversation>();
+    
     public Client(String firstName, String secondName, String passportDetails, String numberPhone) {
         this.setFirstName(firstName);
         this.setSecondName(secondName);
@@ -67,12 +68,15 @@ public class Client {
         this.secondName = secondName;
     }
     
+    public String getShortInfo(){
+        return "Client{" + "firstName=" + getFirstName() + 
+                ", secondName=" + getSecondName() + ", passportDetails=" 
+                + getPassportDetails() + ", numberPhone=" + getNumberPhone();
+    }
+    
     @Override
     public String toString(){
-        String baseMessage = "Client{" + "firstName=" + getFirstName() + 
-                ", secondName=" + getSecondName() + ", passportDetails=" 
-                + getPassportDetails() + ", numberPhone=" + getNumberPhone() 
-                + ", orders={\n";
+        String baseMessage = getShortInfo() + ", orders={\n";
         StringBuilder stringBuilder = new StringBuilder(baseMessage);
         for(int i = 0; i < orders.size(); i++){
             Order order = orders.get(i);
@@ -81,7 +85,15 @@ public class Client {
                                 + order.getOrderDate() +'\n';
             stringBuilder.append(infoOrder);
         }
+        stringBuilder.append("},\n CustomerConversations={\n");
+        for(int i = 0; i < customerConversations.size(); i++){
+            CustomerConversation conversation  = customerConversations.get(i);
+            String infoOrder =  "Index: " + i + ". "
+                                + conversation.getShortInfo() + '\n';
+            stringBuilder.append(infoOrder);
+        }
         stringBuilder.append('}');
+        
         return stringBuilder.toString();
     }
 
@@ -90,6 +102,14 @@ public class Client {
             orders.add(newOrder);
 
             newOrder.setClient(this);
+        }
+    }
+    
+    public void addCustomerConversation(CustomerConversation newConversation) {
+        if( !(newConversation == null) && !customerConversations.contains(newConversation)) { 
+            customerConversations.add(newConversation);
+
+            newConversation.setClient(this);
         }
     }
 }

@@ -83,10 +83,30 @@ public class Receptionist {
         this.workShift = workShift;
     }
 
+    public String getShortInfo(){
+        StringBuilder stringBuilder = new StringBuilder('[');
+        for(int i = 0; i < knowledgeableLanguages.size(); i++)
+        {
+            stringBuilder.append(knowledgeableLanguages.get(i)+", ");
+        }
+        stringBuilder.append(']');
+        return "Receptionist{" + "firstName=" + getFirstName() 
+               + ", secondName=" + secondName 
+               + ", knowledgeableLanguages=" + stringBuilder.toString()
+               + ", workShift=" + workShift;
+    }
     @Override
     public String toString() {
-        return "Сделай ToSttring() для Receptionist.";
-// return "Receptionist{" + "firstName=" + firstName + ", secondName=" + secondName + ", knowledgeableLanguages=" + knowledgeableLanguages + ", workShift=" + workShift + ", customerConversations=" + customerConversations + '}';
+        String baseMessage = getShortInfo() + ", CustomerConversations={\n";
+        StringBuilder stringBuilder = new StringBuilder(baseMessage);
+        for(int i = 0; i < customerConversations.size(); i++){
+            CustomerConversation conversation  = customerConversations.get(i);
+            String infoOrder =  "Index: " + i + ". "
+                                + conversation.getShortInfo() + '\n';
+            stringBuilder.append(infoOrder);
+        }
+        stringBuilder.append('}');
+        return stringBuilder.toString();
     }
     
     public void addCustomerConversation(CustomerConversation newConversation) {
