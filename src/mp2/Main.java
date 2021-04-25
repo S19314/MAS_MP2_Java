@@ -22,11 +22,11 @@ public class Main {
                
         client1.addOrder(order2);
         client1.addOrder(null); // funkcja flitruje null
-        order1.addClient(null); // funkcja flitruje null
-        order1.addClient(client2);
-        order1.addClient(client2); // Test: Try to add second time. 
+        order1.setClient(null); // funkcja flitruje null
+        order1.setClient(client2);
+        order1.setClient(client2); // Test: Try to add second time. 
         // Ale nie dodadaje 'client2' - jak i powinno, bo już jest dodany.
-        order1.addClient(client1);
+        order1.setClient(client1);
         System.out.println("Info: ");
         System.out.println(order1);
         System.out.println(order2);

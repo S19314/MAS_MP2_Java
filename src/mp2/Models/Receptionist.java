@@ -93,7 +93,7 @@ public class Receptionist {
         if( !(newConversation == null) && !customerConversations.contains(newConversation)) { 
             customerConversations.add(newConversation);
 
-            newConversation.addReceptionist(this);
+            newConversation.setReceptionist(this);
         }
     }
 }

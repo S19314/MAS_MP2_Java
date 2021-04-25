@@ -27,7 +27,7 @@ public class Order {
         setComment(comment);
     }
     
-    private int createId()
+    private static int createId()
     {
         maxId++;
         return maxId;
@@ -61,9 +61,7 @@ public class Order {
         return client;
     }
 
-    private void setClient(Client client) {
-        this.client = client;
-    }
+    
     
     @Override
     public String toString() {
@@ -76,13 +74,13 @@ public class Order {
         return info;
     }
 
-    public void addClient(Client newClient) {
+    public void setClient(Client newClient) {
         // Будет ли StackOwerflow, если добавить null, как клиента?
         // Мб, сразу уьрать возможность добавления nnull
 //         Ти:if(client.equals(null) || !newClient.equals(null)
 //         if(client.equals(null)) { 
         if((getClient() == null) && !(newClient == null)){
-            setClient(newClient);
+            this.client = newClient;
             
             newClient.addOrder(this);
         }

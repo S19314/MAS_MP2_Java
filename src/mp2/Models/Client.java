@@ -89,7 +89,7 @@ public class Client {
         if( !(newOrder == null) && !orders.contains(newOrder)) { 
             orders.add(newOrder);
 
-            newOrder.addClient(this);
+            newOrder.setClient(this);
         }
     }
 }
