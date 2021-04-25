@@ -19,8 +19,15 @@ public class Main {
     public static void main(String[] args) {
         Client client1 = new Client("Nodzu", "Mitycura", "SL4055855", "+238974312");
         Client client2 = new Client("Nikolaj", "Lisicyn", "VT214124", "+214125415");
-        Order order1 = new Order(2, "");
-        Order order2 = new Order(5, "Pokój z widokiem na morze.");
+        Order order1 = Order.createOrder(2, "", 3000.0, "USD", "Luksus", 3);
+        Order order2 = Order.createOrder(
+                5,
+                "Pokój z widokiem na morze.",
+                6000.4,
+                "EUR",
+                "Luksus",
+                2);
+        order1.createPart(1000, "YAN", "Standart", 1);
 //      Asocjacja zwykla DOWN
         client1.addOrder(order2);
         client1.addOrder(null); // funkcja flitruje null

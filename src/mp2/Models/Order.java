@@ -23,12 +23,22 @@ public class Order {
    
     private Client client;
     private Receptionist receptionist;
+    private List<PaymentRecord> paymentRecordes = new ArrayList<>();
     
-    public Order(int quantityPersonsForLiving, String comment) {
+    private Order(int quantityPersonsForLiving, String comment) {
         setQuantityPersonsForLiving(quantityPersonsForLiving);
         setComment(comment);
     }
     
+    public static Order createOrder(int quantityPersonsForLiving, String comment,
+                            double price, 
+                            String currency,
+                            String apartmentType, 
+                            int quantityOfApartmentsType){
+        Order order = new Order(quantityPersonsForLiving, comment);
+        order.createPart(price, currency, apartmentType, quantityOfApartmentsType);
+        return order;
+    }
     private static int createId()
     {
         maxId++;
@@ -78,7 +88,11 @@ public class Order {
         String receptionistInfo = receptionist == null ? "" : receptionist.getShortInfo();
         String info = getShortInfo() + ", " 
                     + clientInfo + ", "
-                    + receptionistInfo + " \n";
+                    + receptionistInfo + " \n[";
+        for(int i = 0; i < paymentRecordes.size(); i++){
+            info += paymentRecordes.get(i).toString() +", ";
+        }
+        info += "]\n";
         return info;
     }
 
@@ -118,5 +132,70 @@ public class Order {
     }
     public Receptionist getReceptionistQualif() {
         return this.receptionist;
+    }
+    
+    public PaymentRecord createPart(double price, String currency, 
+                                    String apartmentType, 
+                                    int quantityOfApartmentsType
+    ) {
+        PaymentRecord paymentRecord = new PaymentRecord(
+                price,
+                currency,
+                apartmentType,
+                quantityOfApartmentsType
+        ); 
+        paymentRecordes.add(paymentRecord);
+        return paymentRecord;
+    }
+
+    public class PaymentRecord{
+        private double price;
+        private String currency;   
+        private String apartmentType;
+        private int quantityOfApartmentsType;
+
+        public PaymentRecord(double price, String currency, String apartmentType, int quantityOfApartmentsType) {
+            this.setPrice(price);
+            this.setCurrency(currency);
+            this.setApartmentType(apartmentType);
+            this.setQuantityOfApartmentsType(quantityOfApartmentsType);
+        }
+        
+        public double getPrice() {
+            return price;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
+        }
+
+        public String getCurrency() {
+            return currency;
+        }
+
+        public void setCurrency(String currency) {
+            this.currency = currency;
+        }
+
+        public String getApartmentType() {
+            return apartmentType;
+        }
+
+        public void setApartmentType(String apartmentType) {
+            this.apartmentType = apartmentType;
+        }
+
+        public int getQuantityOfApartmentsType() {
+            return quantityOfApartmentsType;
+        }
+
+        public void setQuantityOfApartmentsType(int quantityOfApartmentsType) {
+            this.quantityOfApartmentsType = quantityOfApartmentsType;
+        }
+
+        @Override
+        public String toString() {
+            return "PaymentRecord{" + "price=" + price + ", currency=" + currency + ", apartmentType=" + apartmentType + ", quantityOfApartmentsType=" + quantityOfApartmentsType + '}';
+        }
     }
 }
