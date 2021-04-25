@@ -63,14 +63,22 @@ public class Order {
         return client;
     }
     
+    
+    public String getShortInfo()
+    {
+        return "Order{" + "id=" + getId() 
+               + ", orderDate=" + getOrderDate() 
+               + ", quantityPersonsForLiving=" + getQuantityPersonsForLiving() 
+               + ", comment=" + getComment();
+    }
+    
     @Override
     public String toString() {
-        String info = "Order{" + "id=" + getId() + ", orderDate=" 
-               + getOrderDate() + ", quantityPersonsForLiving=" 
-               + getQuantityPersonsForLiving() + ", comment=" + getComment() 
-               + ", client={\n firstName: " + client.getFirstName() 
-               + "; secondName: " + client.getSecondName()
-               + "; phoneNumber: " + client.getNumberPhone()+ "}}\n";
+        String clientInfo = client == null ? "" : client.getShortInfo();
+        String receptionistInfo = receptionist == null ? "" : receptionist.getShortInfo();
+        String info = getShortInfo() + ", " 
+                    + clientInfo + ", "
+                    + receptionistInfo + " \n";
         return info;
     }
 

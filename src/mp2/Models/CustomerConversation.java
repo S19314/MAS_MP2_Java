@@ -162,9 +162,11 @@ public class CustomerConversation {
 
     @Override
     public String toString() {
+        String clientInfo = client == null ? "" : client.getShortInfo();
+        String receptionistInfo = receptionist == null ? "" : receptionist.getShortInfo();
         String baseMessage = getShortInfo() + ", " 
-                + client.getShortInfo() + ", " 
-                + receptionist.getShortInfo() + ".";
+                + clientInfo + ", " 
+                + receptionistInfo + ".";
         return baseMessage;
     }
     

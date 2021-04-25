@@ -107,7 +107,16 @@ public class Receptionist {
                                 + conversation.getShortInfo() + '\n';
             stringBuilder.append(infoOrder);
         }
+        stringBuilder.append("}\n");
+        Order[] arrayOrders = ordersQualificator.values().toArray(new Order[0]);
+        for(int i = 0; i < arrayOrders.length; i++){
+            Order order  = arrayOrders[i];
+            String infoOrder =  "Index: " + i + ". "
+                                + order.getShortInfo() + '\n';
+            stringBuilder.append(infoOrder);
+        }
         stringBuilder.append('}');
+        
         return stringBuilder.toString();
     }
     

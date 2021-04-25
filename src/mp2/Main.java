@@ -95,6 +95,14 @@ public class Main {
         System.out.println(customerConversationNull);
         
     //      Asocjacja z atrybutem UP
+        
+    //      Asocjacja kwalifikowana DOWN
+        order1.setReceptionistQualif(receptionist2);
+        System.out.println(order1);
+        System.out.println(receptionist2);
+    //      Asocjacja kwalifikowana UP
+        
+        
     }
     
 }
