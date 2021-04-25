@@ -22,7 +22,7 @@ public class CustomerConversation {
     private Receptionist receptionist;
     private Client client;
             
-    public CustomerConversation(
+    private CustomerConversation(
             int markServiceQuality, 
             int conversationLengthInSeconds,
             Receptionist receptionist, 
@@ -31,6 +31,28 @@ public class CustomerConversation {
         this.setConversationLengthInSeconds(conversationLengthInSeconds);
         this.setReceptionist(receptionist);
         this.setClient(client);
+    }
+    
+    public static CustomerConversation createCustomerConversation (
+            int markServiceQuality, 
+            int conversationLengthInSeconds,
+            Receptionist receptionist, 
+            Client client
+    ) throws Exception {
+        if(client == null){
+            throw new Exception("Client is null. CustomerConversation can't be created.");
+        }
+        
+        if(receptionist == null){
+            throw new Exception("Receptionist is null. CustomerConversation can't be created.");
+        }
+        
+       CustomerConversation conversation = new CustomerConversation(
+            markServiceQuality, 
+            conversationLengthInSeconds,
+            receptionist, 
+            client);
+       return conversation;
     }
     
     private int createId()

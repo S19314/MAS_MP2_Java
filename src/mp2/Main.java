@@ -53,20 +53,46 @@ public class Main {
         // А если будет null, как obj?
         // Создать метод который выбрасывает ошибку,
         // если один из obj - null.
-        CustomerConversation customerConversation1 = new CustomerConversation(
+        CustomerConversation customerConversation1 = null,
+                customerConversation2 = null;
+        try {
+            customerConversation1 =
+                CustomerConversation.createCustomerConversation(
                 3,
-                2000,
+                2000, 
                 receptionist1,
-                client2),
-                customerConversation2 = new CustomerConversation(
+                client2);       
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        try {
+            customerConversation2 =
+                CustomerConversation.createCustomerConversation(
                 4,
                 3000,
                 receptionist1,
                 client1);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        
+        CustomerConversation customerConversationNull = null;
+        try {
+            customerConversationNull =
+                CustomerConversation.createCustomerConversation(
+                4,
+                3000,
+                null,
+                null
+                );
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
         System.out.println(receptionist1);
         System.out.println(receptionist2);
         System.out.println(customerConversation1);
         System.out.println(customerConversation2);
+        System.out.println(customerConversationNull);
         
     //      Asocjacja z atrybutem UP
     }
