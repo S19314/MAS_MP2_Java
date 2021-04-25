@@ -52,11 +52,12 @@ public class CustomerConversation {
         LocalDateTime endDateTime = LocalDateTime.of(
                 startDateTime.getYear(),
                 startDateTime.getMonthValue(),
+                startDateTime.getDayOfMonth(),
                 startDateTime.getHour(),
                 startDateTime.getMinute(),
                 startDateTime.getSecond()
         );
-        endDateTime.plusSeconds(getConversationLengthInSeconds());
+        endDateTime = endDateTime.plusSeconds(getConversationLengthInSeconds());
         return endDateTime;
     }
     

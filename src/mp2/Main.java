@@ -7,6 +7,8 @@ package mp2;
 
 import mp2.Models.Order;
 import mp2.Models.Client;
+import mp2.Models.CustomerConversation;
+import mp2.Models.Receptionist;
 
 /**
  *
@@ -19,7 +21,7 @@ public class Main {
         Client client2 = new Client("Nikolaj", "Lisicyn", "VT214124", "+214125415");
         Order order1 = new Order(2, "");
         Order order2 = new Order(5, "Pokój z widokiem na morze.");
-               
+//      Asocjacja zwykla DOWN
         client1.addOrder(order2);
         client1.addOrder(null); // funkcja flitruje null
         order1.setClient(null); // funkcja flitruje null
@@ -32,6 +34,41 @@ public class Main {
         System.out.println(order2);
         System.out.println(client1);
         System.out.println(client2);
+    //      Asocjacja zwykla UP
+    //      Asocjacja z atrybutem DOWN
+        
+        Receptionist receptionist1 = new Receptionist(
+                "Grzegorz",
+                "Tuskin", 
+                Receptionist.WorkShift.Dzienna,
+                new String[]{"Polski"}
+                ),
+                receptionist2 = new Receptionist(
+                "William",
+                "Shakespeare", 
+                Receptionist.WorkShift.Nocna,
+                new String[]{"English", "Japanese"}
+                );
+        
+        // А если будет null, как obj?
+        // Создать метод который выбрасывает ошибку,
+        // если один из obj - null.
+        CustomerConversation customerConversation1 = new CustomerConversation(
+                3,
+                2000,
+                receptionist1,
+                client2),
+                customerConversation2 = new CustomerConversation(
+                4,
+                3000,
+                receptionist1,
+                client1);
+        System.out.println(receptionist1);
+        System.out.println(receptionist2);
+        System.out.println(customerConversation1);
+        System.out.println(customerConversation2);
+        
+    //      Asocjacja z atrybutem UP
     }
     
 }

@@ -12,7 +12,7 @@ public class Receptionist {
     private String firstName;
     private String secondName;
     private List<String> knowledgeableLanguages = new ArrayList<>();
-    enum WorkShift{
+    public enum WorkShift{
         Dzienna,
         Nocna,
         Dzienna_Nocna, 
