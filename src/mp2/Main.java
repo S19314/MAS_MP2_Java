@@ -15,20 +15,23 @@ import mp2.Models.Client;
 public class Main {
 
     public static void main(String[] args) {
-        Client person1 = new Client("Nodzu", "Mitycura");
-        Person person2 = new Client("Nikolaj", "Lisicyn");
-        Order office1 = new Order(12, "4551 Airport Rd, Riverton, WY 82501, USA");        Office office2 = new Order(35, "1501 N Poplar St, Casper, WY 82601, USA");;
+        Client client1 = new Client("Nodzu", "Mitycura", "SL4055855", "+238974312");
+        Client client2 = new Client("Nikolaj", "Lisicyn", "VT214124", "+214125415");
+        Order order1 = new Order(2, "");
+        Order order2 = new Order(5, "Pokój z widokiem na morze.");
                
-        person1.addOffice(office2);
-        office1.addPerson(person2);
-        office1.addPerson(person2); // Test: Try to add second time. 
-        // Ale nie dodadaje 'person2' - jak i powinno.
-        office1.addPerson(person1);
+        client1.addOrder(order2);
+        client1.addOrder(null); // funkcja flitruje null
+        order1.addClient(null); // funkcja flitruje null
+        order1.addClient(client2);
+        order1.addClient(client2); // Test: Try to add second time. 
+        // Ale nie dodadaje 'client2' - jak i powinno, bo już jest dodany.
+        order1.addClient(client1);
         System.out.println("Info: ");
-        System.out.println(office1);
-        System.out.println(office2);
-        System.out.println(person1);
-        System.out.println(person2);
+        System.out.println(order1);
+        System.out.println(order2);
+        System.out.println(client1);
+        System.out.println(client2);
     }
     
 }

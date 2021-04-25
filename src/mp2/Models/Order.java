@@ -65,30 +65,23 @@ public class Order {
         this.client = client;
     }
     
-    
-    
-    // 1. Сделать так же для Client
-    // 2. Затетисть всё позже
-    // 3. ... хз
     @Override
     public String toString() {
-        return  "Сделай ToSting() в Order, PLS)";
-        /*
-        StringBuilder stringBuilder = new StringBuilder("Office{" + "numberOffice=" + numberOffice + ", address=" + address + ", persons={\n");
-        for(int i = 0; i < persons.size(); i++){
-            Client person = persons.get(i);
-            stringBuilder.append("Index: " + i + "; firstName: " + person.getFirstName() + "; secondName: " + person.getSecondName() +'\n');
-        }
-        stringBuilder.append('}');
-        return stringBuilder.toString();
-        */
+        String info = "Order{" + "id=" + getId() + ", orderDate=" 
+               + getOrderDate() + ", quantityPersonsForLiving=" 
+               + getQuantityPersonsForLiving() + ", comment=" + getComment() 
+               + ", client={\n firstName: " + client.getFirstName() 
+               + "; secondName: " + client.getSecondName()
+               + "; phoneNumber: " + client.getNumberPhone()+ "}}\n";
+        return info;
     }
-    
+
     public void addClient(Client newClient) {
         // Будет ли StackOwerflow, если добавить null, как клиента?
         // Мб, сразу уьрать возможность добавления nnull
-//         Ти: if(client.equals(null) || !newClient.equals(null)
-        if(client.equals(null)) { 
+//         Ти:if(client.equals(null) || !newClient.equals(null)
+//         if(client.equals(null)) { 
+        if((getClient() == null) && !(newClient == null)){
             setClient(newClient);
             
             newClient.addOrder(this);

@@ -66,26 +66,30 @@ public class Client {
     public void setSecondName(String secondName) {
         this.secondName = secondName;
     }
-
+    
     @Override
     public String toString(){
-        return  "Сделай ToSting() в Client, PLS)";
-        /*
-        StringBuilder stringBuilder = new StringBuilder("Person{" + "firstName=" + firstName + ", secondName=" + secondName + ", offices={\n" );
+        String baseMessage = "Client{" + "firstName=" + getFirstName() + 
+                ", secondName=" + getSecondName() + ", passportDetails=" 
+                + getPassportDetails() + ", numberPhone=" + getNumberPhone() 
+                + ", orders={\n";
+        StringBuilder stringBuilder = new StringBuilder(baseMessage);
         for(int i = 0; i < orders.size(); i++){
-            Order office = orders.get(i);
-            stringBuilder.append("Index: " + i + "; address: " + office.getAddress()+ "; numberOffice: " + office.getNumberOffice() +'\n');
+            Order order = orders.get(i);
+            String infoOrder =  "Index: " + i + "Order{ id=" + order.getId() 
+                                + ", orderDate=" 
+                                + order.getOrderDate() +'\n';
+            stringBuilder.append(infoOrder);
         }
         stringBuilder.append('}');
         return stringBuilder.toString();
-        */
     }
-    
+
     public void addOrder(Order newOrder) {
-        if(!orders.contains(newOrder)) { 
+        if( !(newOrder == null) && !orders.contains(newOrder)) { 
             orders.add(newOrder);
 
-            newOrder.addPerson(this);
+            newOrder.addClient(this);
         }
     }
 }
