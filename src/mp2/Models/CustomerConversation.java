@@ -148,8 +148,6 @@ public class CustomerConversation {
         }
     }
     
-    
-    
     public String getShortInfo(){
         return "CustomerConversation{" 
                 + "id=" + getId() 

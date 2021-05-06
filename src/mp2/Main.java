@@ -19,6 +19,8 @@ public class Main {
     public static void main(String[] args) {
         Client client1 = new Client("Nodzu", "Mitycura", "SL4055855", "+238974312");
         Client client2 = new Client("Nikolaj", "Lisicyn", "VT214124", "+214125415");
+        
+        // 4. Kompozycja jest stworzona w Order.
         Order order1 = Order.createOrder(2, "", 3000.0, "USD", "Luksus", 3);
         Order order2 = Order.createOrder(
                 5,
@@ -28,7 +30,7 @@ public class Main {
                 "Luksus",
                 2);
         order1.createPart(1000, "YAN", "Standart", 1);
-//      Asocjacja zwykla DOWN
+//      1. Asocjacja zwykla DOWN
         client1.addOrder(order2);
         client1.addOrder(null); // funkcja flitruje null
         order1.setClient(null); // funkcja flitruje null
@@ -42,7 +44,7 @@ public class Main {
         System.out.println(client1);
         System.out.println(client2);
     //      Asocjacja zwykla UP
-    //      Asocjacja z atrybutem DOWN
+    //      2. Asocjacja z atrybutem DOWN
         
         Receptionist receptionist1 = new Receptionist(
                 "Grzegorz",
@@ -57,9 +59,6 @@ public class Main {
                 new String[]{"English", "Japanese"}
                 );
         
-        // А если будет null, как obj?
-        // Создать метод который выбрасывает ошибку,
-        // если один из obj - null.
         CustomerConversation customerConversation1 = null,
                 customerConversation2 = null;
         try {
@@ -103,7 +102,7 @@ public class Main {
         
     //      Asocjacja z atrybutem UP
         
-    //      Asocjacja kwalifikowana DOWN
+    //  3.  Asocjacja kwalifikowana DOWN
         order1.setReceptionistQualif(receptionist2);
         System.out.println(order1);
         System.out.println(receptionist2);

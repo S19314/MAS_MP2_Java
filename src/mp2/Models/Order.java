@@ -8,7 +8,6 @@ package mp2.Models;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -71,6 +70,10 @@ public class Order {
 
     private Client getClient() {
         return client;
+    }
+
+    public PaymentRecord[] getPaymentRecordes() {
+        return paymentRecordes.toArray(new PaymentRecord[0]);
     }
     
     
