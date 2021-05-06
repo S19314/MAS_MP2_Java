@@ -8,6 +8,7 @@ package mp2.Models;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -227,7 +228,6 @@ public class Order {
         public String toString() {
             return "PaymentRecord{" + "price=" + price + ", currency=" + currency + ", apartmentType=" + apartmentType + ", quantityOfApartmentsType=" + quantityOfApartmentsType +", Order=" + this.getOrder().getShortInfo() +'}';
         }
-
         
         @Override
         public boolean equals(Object obj) {            
@@ -244,6 +244,17 @@ public class Order {
                 this.getCurrency().equals(paymentRecord.getCurrency()) && 
                 this.getApartmentType().equals(paymentRecord.getApartmentType()) &&
                 this.getQuantityOfApartmentsType() == paymentRecord.getQuantityOfApartmentsType();
+        }
+
+        @Override
+        public int hashCode() {
+            int hash = 7;
+            hash = 89 * hash + Objects.hashCode(this.order);
+            hash = 89 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
+            hash = 89 * hash + Objects.hashCode(this.currency);
+            hash = 89 * hash + Objects.hashCode(this.apartmentType);
+            hash = 89 * hash + this.quantityOfApartmentsType;
+            return hash;
         }
     }
 }
