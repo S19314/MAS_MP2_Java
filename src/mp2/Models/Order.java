@@ -97,7 +97,8 @@ public class Order {
                     + clientInfo + ", "
                     + receptionistInfo + " \n[";
         for(int i = 0; i < paymentRecordes.size(); i++){
-            info += paymentRecordes.get(i).toString() +", ";
+            info += paymentRecordes.get(i).getShortInfo() +", ";
+            // info += paymentRecordes.get(i).toString() +", ";
         }
         info += "]\n";
         return info;
@@ -218,29 +219,31 @@ public class Order {
         
         
         
+        public String getShortInfo(){
+            return "PaymentRecord{" + "price=" + price + ", currency=" + currency + ", apartmentType=" + apartmentType + ", quantityOfApartmentsType=" + quantityOfApartmentsType + '}'; 
+        }
+        
         @Override
         public String toString() {
             return "PaymentRecord{" + "price=" + price + ", currency=" + currency + ", apartmentType=" + apartmentType + ", quantityOfApartmentsType=" + quantityOfApartmentsType +", Order=" + this.getOrder().getShortInfo() +'}';
         }
 
-        /*
-        @Override
-        public boolean equals(Object obj) {
-            
-            if (obj == this) {
-        return true;
-    }
-    if (obj == null || obj.getClass() != this.getClass()) {
-        return false;
-    }
-
-    Person guest = (Person) obj;
-    return
-            return super.equals(obj); 
-            
-            
-        }
-        */
         
+        @Override
+        public boolean equals(Object obj) {            
+            if (obj == this) {
+                return true;
+            }
+            if (obj == null || obj.getClass() != this.getClass()) {
+                return false;
+            }
+
+            PaymentRecord paymentRecord = (PaymentRecord) obj;
+            return this.getOrder().equals(paymentRecord.getOrder()) &&
+                this.getPrice() == paymentRecord.getPrice() &&
+                this.getCurrency().equals(paymentRecord.getCurrency()) && 
+                this.getApartmentType().equals(paymentRecord.getApartmentType()) &&
+                this.getQuantityOfApartmentsType() == paymentRecord.getQuantityOfApartmentsType();
+        }
     }
 }

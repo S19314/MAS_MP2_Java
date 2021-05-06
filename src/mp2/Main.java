@@ -49,7 +49,8 @@ public class Main {
             */
         }
         try{
-            order1.createPart(1000, "YAN", "Standart", 1);
+            Order.PaymentRecord pr = order1.createPart(1000, "YAN", "Standart", 1);
+            System.out.println("Created PaymentRecord: " + pr);
         } catch (Exception e) {
             // System.err.println(e.getMessage());
             System.out.println(e.getMessage()); 
@@ -59,7 +60,8 @@ public class Main {
         }
         
         try{
-            order1.createPart(1000, "YAN", "Standart", 1);
+            Order.PaymentRecord pr = order1.createPart(1000, "YAN", "Standart", 1);
+            System.out.println("Created PaymentRecord: " + pr);
         } catch (Exception e) {
             // System.err.println(e.getMessage());
             System.out.println("EXPECTED_EXCEPTION. Two equal PaymentRecord in on order: " + e.getMessage()); 
