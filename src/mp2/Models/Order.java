@@ -29,12 +29,16 @@ public class Order {
         setComment(comment);
     }
     
-    public static Order createOrder(int quantityPersonsForLiving, String comment,
+    public static Order createOrder(
+                            int quantityPersonsForLiving,
+                            String comment,
                             double price, 
                             String currency,
                             String apartmentType, 
-                            int quantityOfApartmentsType){
+                            int quantityOfApartmentsType
+    )throws Exception{
         Order order = new Order(quantityPersonsForLiving, comment);
+        
         order.createPart(price, currency, apartmentType, quantityOfApartmentsType);
         return order;
     }
@@ -140,28 +144,44 @@ public class Order {
     public PaymentRecord createPart(double price, String currency, 
                                     String apartmentType, 
                                     int quantityOfApartmentsType
-    ) {
+    ) throws Exception {
+        
         PaymentRecord paymentRecord = new PaymentRecord(
                 price,
                 currency,
                 apartmentType,
-                quantityOfApartmentsType
+                quantityOfApartmentsType,
+                this
         ); 
+        if(paymentRecordes.contains(paymentRecord)){
+            throw new Exception("Can't be created two equal PaymentRecord in the same Order.");
+        }
         paymentRecordes.add(paymentRecord);
         return paymentRecord;
     }
 
-    public class PaymentRecord{
+    public class PaymentRecord {
+        private Order order;
         private double price;
         private String currency;   
         private String apartmentType;
         private int quantityOfApartmentsType;
 
-        public PaymentRecord(double price, String currency, String apartmentType, int quantityOfApartmentsType) {
+        public PaymentRecord(double price, String currency, String apartmentType, int quantityOfApartmentsType, Order order) {
+            this.setOrder(order);
             this.setPrice(price);
             this.setCurrency(currency);
             this.setApartmentType(apartmentType);
             this.setQuantityOfApartmentsType(quantityOfApartmentsType);
+        }
+
+        public Order getOrder() {
+            return order;
+        }
+
+        private void setOrder(Order order) {
+            if(order == null) throw new NullPointerException("Payment Record can\'t be created without Order. ");
+            this.order = order;
         }
         
         public double getPrice() {
@@ -195,10 +215,32 @@ public class Order {
         public void setQuantityOfApartmentsType(int quantityOfApartmentsType) {
             this.quantityOfApartmentsType = quantityOfApartmentsType;
         }
-
+        
+        
+        
         @Override
         public String toString() {
-            return "PaymentRecord{" + "price=" + price + ", currency=" + currency + ", apartmentType=" + apartmentType + ", quantityOfApartmentsType=" + quantityOfApartmentsType + '}';
+            return "PaymentRecord{" + "price=" + price + ", currency=" + currency + ", apartmentType=" + apartmentType + ", quantityOfApartmentsType=" + quantityOfApartmentsType +", Order=" + this.getOrder().getShortInfo() +'}';
         }
+
+        /*
+        @Override
+        public boolean equals(Object obj) {
+            
+            if (obj == this) {
+        return true;
+    }
+    if (obj == null || obj.getClass() != this.getClass()) {
+        return false;
+    }
+
+    Person guest = (Person) obj;
+    return
+            return super.equals(obj); 
+            
+            
+        }
+        */
+        
     }
 }

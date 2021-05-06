@@ -15,22 +15,73 @@ import mp2.Models.Receptionist;
  * @author S19314
  */
 public class Main {
-
     public static void main(String[] args) {
         Client client1 = new Client("Nodzu", "Mitycura", "SL4055855", "+238974312");
         Client client2 = new Client("Nikolaj", "Lisicyn", "VT214124", "+214125415");
         
         // 4. Kompozycja jest stworzona w Order.
-        Order order1 = Order.createOrder(2, "", 3000.0, "USD", "Luksus", 3);
-        Order order2 = Order.createOrder(
+        Order order1 = null;
+        Order order2 = null;
+        System.out.println("Info: ");
+        try {
+            order1 = Order.createOrder(2, "", 3000.0, "USD", "Luksus", 3);
+        } catch (Exception e) {
+            // System.err.println(e.getMessage());
+            System.out.println(e.getMessage()); 
+            /* Kożystam z "out", a nie z "err" tylko dla prezentacji,
+            żeby łatwiej obejrzeć sekwencje wykonania programu.
+            */
+        }
+        
+        try {
+            order2 = Order.createOrder(
                 5,
                 "Pokój z widokiem na morze.",
                 6000.4,
                 "EUR",
                 "Luksus",
                 2);
-        order1.createPart(1000, "YAN", "Standart", 1);
+        } catch (Exception e) {
+            // System.err.println(e.getMessage());
+            System.out.println(e.getMessage()); 
+            /* Kożystam z "out", a nie z "err" tylko dla prezentacji,
+            żeby łatwiej obejrzeć sekwencje wykonania programu.
+            */
+        }
+        try{
+            order1.createPart(1000, "YAN", "Standart", 1);
+        } catch (Exception e) {
+            // System.err.println(e.getMessage());
+            System.out.println(e.getMessage()); 
+            /* Kożystam z "out", a nie z "err" tylko dla prezentacji,
+            żeby łatwiej obejrzeć sekwencje wykonania programu.
+            */
+        }
+        
+        try{
+            order1.createPart(1000, "YAN", "Standart", 1);
+        } catch (Exception e) {
+            // System.err.println(e.getMessage());
+            System.out.println("EXPECTED_EXCEPTION. Two equal PaymentRecord in on order: " + e.getMessage()); 
+            /* Kożystam z "out", a nie z "err" tylko dla prezentacji,
+            żeby łatwiej obejrzeć sekwencje wykonania programu.
+            */
+        }
+        
+        
+        try{
+            Order.PaymentRecord paymentRecord232 = order1.new PaymentRecord(1000, "YAN", "Standart", 1, null);
+        } catch (Exception e) {
+            // System.err.println(e.getMessage());
+            System.out.println("EXPECTED_EXCEPTION. Order is null: " + e.getMessage()); 
+            /* Kożystam z "out", a nie z "err" tylko dla prezentacji,
+            żeby łatwiej obejrzeć sekwencje wykonania programu.
+            */
+        }
+        
+        // new Order.PaymentRecord(price, null, null, quantityOfApartmentsType, order2);
 //      1. Asocjacja zwykla DOWN
+        
         client1.addOrder(order2);
         client1.addOrder(null); // funkcja flitruje null
         order1.setClient(null); // funkcja flitruje null
@@ -38,7 +89,7 @@ public class Main {
         order1.setClient(client2); // Test: Try to add second time. 
         // Ale nie dodadaje 'client2' - jak i powinno, bo już jest dodany.
         order1.setClient(client1);
-        System.out.println("Info: ");
+        
         System.out.println(order1);
         System.out.println(order2);
         System.out.println(client1);
@@ -106,9 +157,6 @@ public class Main {
         order1.setReceptionistQualif(receptionist2);
         System.out.println(order1);
         System.out.println(receptionist2);
-    //      Asocjacja kwalifikowana UP
-        
-        
+    //      Asocjacja kwalifikowana UP   
     }
-    
 }
