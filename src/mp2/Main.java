@@ -81,7 +81,11 @@ public class Main {
             */
         }
         
-        // new Order.PaymentRecord(price, null, null, quantityOfApartmentsType, order2);
+        showOrderInfo(order1);
+        showOrderFromPaymentRecordes(order1);
+        showOrderInfo(order2);
+        showOrderFromPaymentRecordes(order2);
+        
 //      1. Asocjacja zwykla DOWN
         
         client1.addOrder(order2);
@@ -97,7 +101,7 @@ public class Main {
         System.out.println(client1);
         System.out.println(client2);
     //      Asocjacja zwykla UP
-    //      2. Asocjacja z atrybutem DOWN
+        //      2. Asocjacja z atrybutem DOWN
         
         Receptionist receptionist1 = new Receptionist(
                 "Grzegorz",
@@ -161,4 +165,20 @@ public class Main {
         System.out.println(receptionist2);
     //      Asocjacja kwalifikowana UP   
     }
+    
+    public static void showOrderFromPaymentRecordes(Order order) {
+        System.out.println("START showOrderFromPaymentRecordes");
+        Order.PaymentRecord[] records =  order.getPaymentRecordes();
+        for(Order.PaymentRecord paymentRecord : records){
+            System.out.println(paymentRecord);
+        }
+        System.out.println("END showOrderFromPaymentRecordes");
+    }
+    
+    public static void showOrderInfo(Order order) {
+        System.out.println("START showOrderInfo");
+        System.out.println(order);
+        System.out.println("END showOrderInfo");
+    }
+    
 }
