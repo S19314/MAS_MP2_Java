@@ -40,7 +40,7 @@ public class Order {
     )throws Exception{
         Order order = new Order(quantityPersonsForLiving, comment);
         
-        order.createPart(price, currency, apartmentType, quantityOfApartmentsType);
+        order.createPart(price, currency, apartmentType, quantityOfApartmentsType, order);
         return order;
     }
     private static int createId()
@@ -143,9 +143,11 @@ public class Order {
         return this.receptionist;
     }
     
-    public PaymentRecord createPart(double price, String currency, 
+    public PaymentRecord createPart(double price,
+                                    String currency, 
                                     String apartmentType, 
-                                    int quantityOfApartmentsType
+                                    int quantityOfApartmentsType,
+                                    Order order
     ) throws Exception {
         
         PaymentRecord paymentRecord = new PaymentRecord(
@@ -153,15 +155,21 @@ public class Order {
                 currency,
                 apartmentType,
                 quantityOfApartmentsType,
-                this
+                order
         ); 
+//        if(paymentRecordes.contains(paymentRecord)){
+//            throw new Exception("Can't be created two equal PaymentRecord in the same Order.");
+//        }
+//        paymentRecordes.add(paymentRecord);
+        // addPaymentRecord(paymentRecord);
+        return paymentRecord;
+    }
+    public void addPaymentRecord(PaymentRecord paymentRecord) throws Exception {
         if(paymentRecordes.contains(paymentRecord)){
             throw new Exception("Can't be created two equal PaymentRecord in the same Order.");
         }
         paymentRecordes.add(paymentRecord);
-        return paymentRecord;
     }
-
     public class PaymentRecord {
         private Order order;
         private double price;
@@ -169,8 +177,21 @@ public class Order {
         private String apartmentType;
         private int quantityOfApartmentsType;
 
-        public PaymentRecord(double price, String currency, String apartmentType, int quantityOfApartmentsType, Order order) {
+        public PaymentRecord(
+                double price, 
+                String currency, 
+                String apartmentType, 
+                int quantityOfApartmentsType, 
+                Order order
+        ) throws Exception{
             this.setOrder(order);
+            try {
+                order.addPaymentRecord(this);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                System.out.println("Exception that informs about  Protection from"
+                        + "adding two same PaymentRecord in one Order.");
+            }
             this.setPrice(price);
             this.setCurrency(currency);
             this.setApartmentType(apartmentType);
@@ -217,8 +238,6 @@ public class Order {
         public void setQuantityOfApartmentsType(int quantityOfApartmentsType) {
             this.quantityOfApartmentsType = quantityOfApartmentsType;
         }
-        
-        
         
         public String getShortInfo(){
             return "PaymentRecord{" + "price=" + price + ", currency=" + currency + ", apartmentType=" + apartmentType + ", quantityOfApartmentsType=" + quantityOfApartmentsType + '}'; 

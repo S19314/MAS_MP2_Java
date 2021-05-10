@@ -23,6 +23,7 @@ public class Main {
         Order order1 = null;
         Order order2 = null;
         System.out.println("Info: ");
+        System.out.println("START Kompozycja: ");
         try {
             order1 = Order.createOrder(2, "", 3000.0, "USD", "Luksus", 3);
         } catch (Exception e) {
@@ -49,7 +50,7 @@ public class Main {
             */
         }
         try{
-            Order.PaymentRecord pr = order1.createPart(1000, "YAN", "Standart", 1);
+            Order.PaymentRecord pr = order1.createPart(1000, "YAN", "Standart", 1, order1);
             System.out.println("Created PaymentRecord: " + pr);
         } catch (Exception e) {
             // System.err.println(e.getMessage());
@@ -60,7 +61,7 @@ public class Main {
         }
         
         try{
-            Order.PaymentRecord pr = order1.createPart(1000, "YAN", "Standart", 1);
+            Order.PaymentRecord pr = order1.createPart(1000, "YAN", "Standart", 1, order1);
             System.out.println("Created PaymentRecord: " + pr);
         } catch (Exception e) {
             // System.err.println(e.getMessage());
@@ -85,9 +86,9 @@ public class Main {
         showOrderFromPaymentRecordes(order1);
         showOrderInfo(order2);
         showOrderFromPaymentRecordes(order2);
-        
+        System.out.println("END Kompozycja;");
 //      1. Asocjacja zwykla DOWN
-        
+        System.out.println("START Asocjacja zwykla:");
         client1.addOrder(order2);
         client1.addOrder(null); // funkcja flitruje null
         order1.setClient(null); // funkcja flitruje null
@@ -101,8 +102,9 @@ public class Main {
         System.out.println(client1);
         System.out.println(client2);
     //      Asocjacja zwykla UP
+        System.out.println("END Asocjacja zwykla;");
         //      2. Asocjacja z atrybutem DOWN
-        
+        System.out.println("START Asocjacja z atrybutem:");
         Receptionist receptionist1 = new Receptionist(
                 "Grzegorz",
                 "Tuskin", 
@@ -158,11 +160,13 @@ public class Main {
         System.out.println(customerConversationNull);
         
     //      Asocjacja z atrybutem UP
-        
+        System.out.println("END Asocjacja z atrybutem;");
     //  3.  Asocjacja kwalifikowana DOWN
+        System.out.println("START Asocjacja kwalifikowana:");
         order1.setReceptionistQualif(receptionist2);
         System.out.println(order1);
         System.out.println(receptionist2);
+        System.out.println("END Asocjacja kwalifikowana;");
     //      Asocjacja kwalifikowana UP   
     }
     
